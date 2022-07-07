@@ -6,8 +6,8 @@ function App() {
   const [firstRow, setfirstRow] = useState([
     {id: 0, label: 'AC', value: 'AC'},
     {id: 1, label: 'DEL',},
-    {id: 2, label: '%',},
-    {id: 3, label: '/',},
+    {id: 2, label: '%', value: '%'},
+    {id: 3, label: '/', value: '/'},
   ]);
 
   const [secondRow, setSecondRow] = useState([
@@ -130,15 +130,91 @@ function App() {
       break;
 
       case '+':
-        setPrevNum(parseFloat(shortSum));
+        if(prevNum == null) {
+          setPrevNum(parseFloat(shortSum));
+        }
+
         setOp('+');
         setShortSum(shortSum + '+');
       break;
 
+      case '-':
+        if(prevNum == null) {
+          setPrevNum(parseFloat(shortSum));
+        }
+
+        setOp('-');
+        setShortSum(shortSum + '-');
+      break;
+
+      case 'X':
+        if(prevNum == null) {
+          setPrevNum(parseFloat(shortSum));
+        }
+
+        setOp('X');
+        setShortSum(shortSum + 'x');
+      break;
+
+      case '/':
+        if(prevNum == null) {
+          setPrevNum(parseFloat(shortSum));
+        }
+
+        setOp('/');
+        setShortSum(shortSum + '/');
+      break;
+
+      case '%':
+        if(prevNum == null) {
+          setPrevNum(parseFloat(shortSum));
+        }
+
+        setOp('%');
+        setShortSum(shortSum + '%');
+      break;
+
       case '=':
         if(op == '+') {
-          console.log('benar')
-          setShortSum(prevNum + parseFloat(nextNum));
+          let resultNum = prevNum + parseFloat(nextNum);
+
+          setFinalSum(resultNum);
+          setShortSum('');
+          setPrevNum(resultNum);
+          setNextNum('');
+          setOp('');
+        }else if(op == '-') {
+          let resultNum = prevNum - parseFloat(nextNum);
+
+          setFinalSum(resultNum);
+          setShortSum('');
+          setPrevNum(resultNum);
+          setNextNum('');
+          setOp('');
+        }else if(op == 'X') {
+          let resultNum = prevNum * parseFloat(nextNum);
+
+          setFinalSum(resultNum);
+          setShortSum('');
+          setPrevNum(resultNum);
+          setNextNum('');
+          setOp('');
+        }else if(op == '/') {
+          let resultNum = prevNum / parseFloat(nextNum);
+
+          setFinalSum(resultNum);
+          setShortSum('');
+          setPrevNum(resultNum);
+          setNextNum('');
+          setOp('');
+        }else if(op == '%') {
+          let resultNum = prevNum / parseFloat(nextNum);
+
+          setFinalSum(resultNum);
+          setShortSum('');
+          setPrevNum(resultNum);
+          setNextNum('');
+          setOp('');
         }
       break;
     }
