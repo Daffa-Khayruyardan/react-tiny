@@ -4,7 +4,7 @@ function Card(props) {
     return(
         <div>
             <h2>{props.title}</h2>
-            <button className="btn btn-success" onClick={() => props.open(props.where, props.title)}>More Info</button>
+            <button className="btn btn-success" onClick={() => props.open(props.title, props.desc)}>More Info</button>
         </div>
     );
 }

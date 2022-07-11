@@ -10,8 +10,42 @@ function App() {
         {id: 3, title: 'javascript', desc: 'Javascript is programming language to make website dynamic'},
     ]);
 
-    
-    
+    const [popUp, setPopUp] = useState({
+        title: '',
+        desc: '',
+        visible: false 
+    });
+
+    const show = (title, desc) => {
+        if(popUp.visible === false) {
+            setPopUp({
+                title: title,
+                desc: desc,
+                visible: true
+            });
+        }else {
+            setPopUp({
+                title: '',
+                desc: '',
+                visible: false
+            })
+        }
+    }
+
+    let popup_screen;
+
+    if(popUp.visible === true) {
+        popup_screen = (
+            <div id='popup-parent' className='position-absolute d-flex h-100 w-100 justify-content-center align-items-center'>
+                <Popup title={popUp.title}
+                    desc={popUp.desc}
+                    close={show}
+                />
+            </div>
+        );
+    }else {
+        popup_screen = '';
+    }
 
     return(  
         <React.Fragment>
@@ -20,12 +54,12 @@ function App() {
                     {info.map(item => 
                         <Card key={item.id} 
                             title={item.title}
+                            desc={item.desc}
                             open={show}
-                            where={item.visible}
                         />
                     )}
                 </div>
-                
+                {popup_screen}
             </main>
         </React.Fragment>
     );
